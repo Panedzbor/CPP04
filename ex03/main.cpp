@@ -7,51 +7,44 @@
 #include <ctime>
 #include "testkit_lib/testkit_lib.hpp"
 
-// int main()
-// {
-//     Character C("John");
-//     std::cout << "Name: " << C.getName() << "\n";
+static void subjectTest();
+static void myOwnTester();
 
-//     Ice* I = new Ice();
-//     I->use(C);
+int main()
+{
+    std::cout << "1. Run the subject test code\n";
+    std::cout << "2. Run my own tester\n";
+    char input = getInput("12");
+    if (input == '1')
+        subjectTest();
+    else
+        myOwnTester();
+    return 0;
+}
 
-//     Cure* Q = new Cure();
-//     Q->use(C);
-
-//     C.equip(I);
-//     C.equip(Q);
-
-//     MateriaSource M;
-//     M.learnMateria(I);
-//     M.learnMateria(Q);
-//     C.equip(M.createMateria(I->getType()));
-//     return 0;
-// }
-
-// int main()
-// {
-//     IMateriaSource* src = new MateriaSource();
-//     src->learnMateria(new Ice());
-//     src->learnMateria(new Cure());
+static void subjectTest()
+{
+    IMateriaSource* src = new MateriaSource();
+    src->learnMateria(new Ice());
+    src->learnMateria(new Cure());
     
-//     ICharacter* me = new Character("me");
+    ICharacter* me = new Character("me");
     
-//     AMateria* tmp;
-//     tmp = src->createMateria("ice");
-//     me->equip(tmp);
-//     tmp = src->createMateria("cure");
-//     me->equip(tmp);
+    AMateria* tmp;
+    tmp = src->createMateria("ice");
+    me->equip(tmp);
+    tmp = src->createMateria("cure");
+    me->equip(tmp);
     
-//     ICharacter* bob = new Character("bob");
+    ICharacter* bob = new Character("bob");
     
-//     me->use(0, *bob);
-//     me->use(1, *bob);
+    me->use(0, *bob);
+    me->use(1, *bob);
     
-//     delete bob;
-//     delete me;
-//     delete src;
-//     return 0;
-// }
+    delete bob;
+    delete me;
+    delete src;
+}
 
 static void displayMenu(void);
 static void executeAction(char input, IMateriaSource* spellbook, ICharacter *C);
@@ -69,7 +62,7 @@ static int getSecsSinceMidnight(void);
 static void subMenuRecipe();
 static void showName(ICharacter *C);
 
-int main()
+void myOwnTester()
 {
     IMateriaSource* spellbook = new MateriaSource();
     ICharacter *C = new Character(giveName("character"));
@@ -85,7 +78,6 @@ int main()
     }
     delete spellbook;
     delete C;
-    return 0;
 }
 
 static void displayMenu(void)
